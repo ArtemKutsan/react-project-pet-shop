@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-white py-14 md:py-20">
       <div className="container max-w-380 space-y-8">
-        <h2 className="text-4xl font-bold tracking-tight md:text-6xl mb-10">Contact</h2>
+        <h2 className="text-4xl font-bold md:text-6xl mb-10">Contact</h2>
         <Contact />
         <Map />
       </div>

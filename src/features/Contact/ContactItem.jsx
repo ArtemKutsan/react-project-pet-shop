@@ -7,14 +7,14 @@ export default function ContactItem({ contact }) {
       {contact.type === 'phone' && (
         <a
           href={contact.href}
-          className="text-2xl font-semibold tracking-tight transition-colors hover:text-blue-600 md:text-4xl"
+          className="text-2xl font-semibold transition-colors hover:text-blue-600 md:text-4xl"
         >
           {contact.value}
         </a>
       )}
 
       {contact.type === 'socials' && (
-        <div className="flex contacts-center gap-4">
+        <div className="flex gap-4">
           {contact.links.map((link) => {
             const Icon = link.icon;
 
@@ -35,13 +35,11 @@ export default function ContactItem({ contact }) {
       )}
 
       {contact.type === 'address' && (
-        <address className="not-italic text-2xl font-semibold tracking-tight md:text-4xl">
-          {contact.value}
-        </address>
+        <address className="not-italic text-2xl font-semibold md:text-4xl">{contact.value}</address>
       )}
 
       {contact.type === 'text' && (
-        <p className="text-2xl font-semibold tracking-tight md:text-4xl">{contact.value}</p>
+        <p className="text-2xl font-semibold md:text-4xl">{contact.value}</p>
       )}
     </div>
   );
