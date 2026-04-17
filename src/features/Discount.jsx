@@ -64,7 +64,7 @@ export default function Discount() {
                     placeholder={field.placeholder}
                     aria-invalid={errors[field.name] ? 'true' : 'false'}
                     {...register(field.name, field.rules)}
-                    className="min-h-14 w-full max-w-none rounded-md border border-white/70 bg-transparent px-8 text-xl text-white placeholder:text-white outline-none focus:border-white"
+                    className="min-h-14 w-full max-w-none rounded-sm border border-white/70 bg-transparent px-8 text-xl text-white placeholder:text-white outline-none focus:border-white"
                   />
                   {errors[field.name] && (
                     <span className="text-sm font-medium text-red-100">
@@ -77,7 +77,7 @@ export default function Discount() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-4 min-h-14 w-full justify-center rounded-md bg-white px-8 text-xl font-semibold text-slate-900 transition-colors hover:bg-slate-100 disabled:bg-slate-200"
+                className="mt-4 min-h-14 w-full justify-center rounded-sm bg-white px-8 text-xl font-semibold text-gray-900 transition-colors hover:bg-gray-100 disabled:bg-gray-200"
               >
                 {isSubmitting ? 'Sending...' : 'Get a discount'}
               </button>
