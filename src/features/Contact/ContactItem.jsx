@@ -2,7 +2,7 @@
 export default function ContactItem({ contact }) {
   return (
     <div className="rounded-xl bg-gray-100 p-8">
-      <h6 className="mb-4 text-xl font-medium text-gray-400">{contact.title}</h6>
+      <h6 className="mb-4 font-medium text-gray-400">{contact.title}</h6>
 
       {contact.type === 'phone' && (
         <a

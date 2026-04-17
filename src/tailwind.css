@@ -3,6 +3,8 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --font-sans: 'Montserrat', system-ui, sans-serif;
@@ -10,14 +12,32 @@
 
 @layer base {
   body {
-    @apply bg-white text-neutral-800 antialiased;
+    @apply bg-white text-gray-800 antialiased;
     font-family: var(--font-sans);
   }
 
-  h1,
-  h2,
+  h1 {
+    @apply text-6xl font-bold md:text-8xl;
+  }
+
+  h2 {
+    @apply text-4xl font-semibold md:text-6xl;
+  }
+
   h3 {
-    @apply font-bold text-neutral-800;
+    @apply text-2xl font-medium md:text-4xl;
+  }
+
+  h4 {
+    @apply text-xl font-medium md:text-2xl;
+  }
+
+  h5 {
+    @apply text-lg font-medium md:text-xl;
+  }
+
+  h6 {
+    @apply text-base font-medium md:text-lg;
   }
 
   button,
@@ -27,17 +47,17 @@
   }
 
   .button-primary {
-    @apply bg-gray-600 text-neutral-100 hover:bg-neutral-700;
+    @apply bg-gray-600 text-white hover:bg-gray-700;
   }
 
   .button-secondary {
-    @apply bg-gray-200 text-neutral-800 hover:bg-neutral-300;
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
   }
 
   input[type='text'],
   input[type='email'],
   textarea {
-    @apply min-h-8 min-w-[216px] max-w-[256px] w-full text-sm border border-neutral-300 px-3 py-1 placeholder:text-neutral-400 rounded-md outline-none bg-neutral-100 focus:border-blue-500;
+    @apply min-h-8 min-w-[216px] max-w-[256px] w-full text-sm border border-gray-300 px-3 py-1 placeholder:text-gray-400 rounded-md outline-none bg-gray-100 focus:border-blue-500;
     font-family: inherit;
   }
 

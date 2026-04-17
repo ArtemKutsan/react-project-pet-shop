@@ -47,16 +47,13 @@ export default function Discount() {
     <div className="bg-white py-14 md:py-20">
       <div className="container max-w-380">
         <div className="rounded-xl bg-blue-700 p-8 pb-0">
-          <h2 className="text-center text-4xl text-white md:text-6xl">5% off on the first order</h2>
+          <h2 className="text-center text-white mb-8">5% off on the first order</h2>
 
-          <div className="grid gap-8 md:grid-cols-[1fr_516px] md:items-end">
-            <img
-              src="/images/discount.png"
-              alt="Pets for the first order discount"
-              className="w-full max-w-[780px] object-cover object-bottom-left"
-            />
-
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-8">
+          <div className="grid gap-8 md:grid-cols-[1.425fr_1fr] md:items-end">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="order-1 grid gap-4 md:mb-8 md:order-2"
+            >
               {formFields.map((field) => (
                 <label key={field.name} className="grid gap-1">
                   <input
@@ -82,6 +79,12 @@ export default function Discount() {
                 {isSubmitting ? 'Sending...' : 'Get a discount'}
               </button>
             </form>
+
+            <img
+              src="/images/discount.png"
+              alt="Pets for the first order discount"
+              className="order-2 w-full max-w-[780px] object-cover object-bottom-left md:order-1"
+            />
           </div>
         </div>
       </div>
