@@ -2,11 +2,21 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchAllProducts, fetchProductsByCategory, fetchProductById } from '../services/api';
 
 const initialState = {
-  allProducts: [],
-  categoryProducts: [],
-  currentProduct: null,
-  loading: false,
-  error: null,
+  all: {
+    data: [],
+    status: 'idle',
+    error: null,
+  },
+  byCategory: {
+    data: [],
+    status: 'idle',
+    error: null,
+  },
+  byId: {
+    data: null,
+    status: 'idle',
+    error: null,
+  },
 };
 
 export const loadAllProducts = createAsyncThunk('products/loadAll', async () => {
@@ -32,46 +42,49 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     clearCurrentProduct: (state) => {
-      state.currentProduct = null;
+      state.byId = { data: null, status: 'idle', error: null };
     },
   },
   extraReducers: (builder) => {
     builder
+      // --- loadAllProducts ---
       .addCase(loadAllProducts.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.all.status = 'loading';
+        state.all.error = null;
       })
       .addCase(loadAllProducts.fulfilled, (state, action) => {
-        state.allProducts = action.payload;
-        state.loading = false;
+        state.all.data = action.payload;
+        state.all.status = 'succeeded';
       })
       .addCase(loadAllProducts.rejected, (state, action) => {
-        state.error = action.error.message;
-        state.loading = false;
+        state.all.error = action.error.message;
+        state.all.status = 'failed';
       })
+      // --- loadProductsByCategory ---
       .addCase(loadProductsByCategory.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.byCategory.status = 'loading';
+        state.byCategory.error = null;
       })
       .addCase(loadProductsByCategory.fulfilled, (state, action) => {
-        state.categoryProducts = action.payload;
-        state.loading = false;
+        state.byCategory.data = action.payload;
+        state.byCategory.status = 'succeeded';
       })
       .addCase(loadProductsByCategory.rejected, (state, action) => {
-        state.error = action.error.message;
-        state.loading = false;
+        state.byCategory.error = action.error.message;
+        state.byCategory.status = 'failed';
       })
+      // --- loadProductById ---
       .addCase(loadProductById.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.byId.status = 'loading';
+        state.byId.error = null;
       })
       .addCase(loadProductById.fulfilled, (state, action) => {
-        state.currentProduct = action.payload;
-        state.loading = false;
+        state.byId.data = action.payload;
+        state.byId.status = 'succeeded';
       })
       .addCase(loadProductById.rejected, (state, action) => {
-        state.error = action.error.message;
-        state.loading = false;
+        state.byId.error = action.error.message;
+        state.byId.status = 'failed';
       });
   },
 });
