@@ -1,4 +1,4 @@
-// src/features/Map/index.jsx
+// src/features/Map.jsx
 
 export default function Map() {
   return (
