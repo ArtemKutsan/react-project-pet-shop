@@ -31,6 +31,7 @@ src/components/Template/
 .agent/
 docs/
 AGENTS.md
+.codex
 
 # Others
 React_Project_Pet_Shop.md
