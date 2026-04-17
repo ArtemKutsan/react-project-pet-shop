@@ -18,12 +18,12 @@ export default function Categories() {
   return (
     <div className="bg-white py-14 md:py-20">
       <div className="container max-w-380 grid gap-10">
-        <div className="flex items-center">
-          <h2 className="shrink-0 md:mr-8">Categories</h2>
-          <div className="h-px grow bg-gray-200" />
+        <div className="flex flex-col md:items-center md:flex-row">
+          <h2 className="mb-4 md:mb-0 md:mr-8">Categories</h2>
+          <div className="hidden md:flex h-px grow bg-gray-200" />
           <Link
             to="/categories"
-            className="flex items-center justify-center shrink-0 min-h-10 rounded-sm border border-gray-200 px-6 font-medium text-gray-400 transition-colors hover:border-gray-400 hover:text-gray-800"
+            className="flex items-center justify-center min-h-10 rounded-sm border border-gray-200 px-6 font-medium text-gray-400 transition-colors hover:border-gray-400 hover:text-gray-800"
           >
             All categories
           </Link>
