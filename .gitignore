@@ -27,6 +27,7 @@ dist-ssr
 src/components/Template/
 
 # AI Agent Knowledge Base & Product Docs
+.qwen/
 .agent/
 docs/
 AGENTS.md
