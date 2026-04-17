@@ -1,0 +1,90 @@
+import { useForm } from 'react-hook-form';
+
+const formFields = [
+  {
+    name: 'name',
+    type: 'text',
+    placeholder: 'Name',
+    rules: { required: 'Required' },
+  },
+  {
+    name: 'phone',
+    type: 'text',
+    placeholder: 'Phone number',
+    rules: {
+      required: 'Required',
+      minLength: { value: 5, message: 'Too short' },
+    },
+  },
+  {
+    name: 'email',
+    type: 'email',
+    placeholder: 'Email',
+    rules: {
+      required: 'Required',
+      pattern: {
+        value: /\S+@\S+\.\S+/,
+        message: 'Invalid email',
+      },
+    },
+  },
+];
+
+export default function Discount() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm();
+
+  const onSubmit = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    reset();
+  };
+
+  return (
+    <div className="bg-white py-14 md:py-20">
+      <div className="container max-w-380">
+        <div className="rounded-xl bg-blue-700 p-8 pb-0">
+          <h2 className="text-center text-4xl text-white md:text-6xl">5% off on the first order</h2>
+
+          <div className="grid gap-8 md:grid-cols-[1fr_516px] md:items-end">
+            <img
+              src="/images/discount.png"
+              alt="Pets for the first order discount"
+              className="w-full max-w-[780px] object-cover object-bottom-left"
+            />
+
+            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-8">
+              {formFields.map((field) => (
+                <label key={field.name} className="grid gap-1">
+                  <input
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    aria-invalid={errors[field.name] ? 'true' : 'false'}
+                    {...register(field.name, field.rules)}
+                    className="min-h-14 w-full max-w-none rounded-md border border-white/70 bg-transparent px-8 text-xl text-white placeholder:text-white outline-none focus:border-white"
+                  />
+                  {errors[field.name] && (
+                    <span className="text-sm font-medium text-red-100">
+                      {errors[field.name].message}
+                    </span>
+                  )}
+                </label>
+              ))}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="mt-4 min-h-14 w-full justify-center rounded-md bg-white px-8 text-xl font-semibold text-slate-900 transition-colors hover:bg-slate-100 disabled:bg-slate-200"
+              >
+                {isSubmitting ? 'Sending...' : 'Get a discount'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
