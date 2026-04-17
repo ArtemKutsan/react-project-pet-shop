@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -38,3 +40,7 @@ React_Project_Pet_Shop.md
 
 # Temp
 temp/
+
+# Backend
+backend/node_modules/
+backend/.env
