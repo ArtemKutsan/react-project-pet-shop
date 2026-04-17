@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchSaleProducts } from '../services/api';
 
 const initialState = {
-  products: [],
-  loading: false,
+  data: [],
+  status: 'idle',
   error: null,
 };
 
@@ -19,16 +19,16 @@ export const saleSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadSaleProducts.pending, (state) => {
-        state.loading = true;
+        state.status = 'loading';
         state.error = null;
       })
       .addCase(loadSaleProducts.fulfilled, (state, action) => {
-        state.products = action.payload;
-        state.loading = false;
+        state.data = action.payload;
+        state.status = 'succeeded';
       })
       .addCase(loadSaleProducts.rejected, (state, action) => {
         state.error = action.error.message;
-        state.loading = false;
+        state.status = 'failed';
       });
   },
 });

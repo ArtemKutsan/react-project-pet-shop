@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchAllCategories } from '../services/api';
 
 const initialState = {
-  categories: [],
-  loading: false,
+  data: [],
+  status: 'idle',
   error: null,
 };
 
@@ -19,16 +19,16 @@ export const categoriesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadCategories.pending, (state) => {
-        state.loading = true;
+        state.status = 'loading';
         state.error = null;
       })
       .addCase(loadCategories.fulfilled, (state, action) => {
-        state.categories = action.payload;
-        state.loading = false;
+        state.data = action.payload;
+        state.status = 'succeeded';
       })
       .addCase(loadCategories.rejected, (state, action) => {
         state.error = action.error.message;
-        state.loading = false;
+        state.status = 'failed';
       });
   },
 });
