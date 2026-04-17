@@ -5,7 +5,7 @@ export default function MainLayout({ children }) {
     <>
       <div className="flex min-h-screen flex-col">
         <Header />
-        <main className="container max-w-380 grow">{children}</main>
+        <main className="grow">{children}</main>
       </div>
       <footer>Footer</footer>
     </>
