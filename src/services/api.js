@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+export const BACKEND_BASE_URL = 'http://localhost:3333';
+
 const api = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: BACKEND_BASE_URL,
 });
 
 export const fetchAllCategories = () => api.get('/categories/all');
