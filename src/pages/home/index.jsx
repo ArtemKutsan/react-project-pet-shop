@@ -1,9 +1,22 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Hero from '../../components/Hero';
 import Categories from '../../features/Categories';
 import Discount from '../../features/Discount';
+import { loadCategories } from '../../store/categoriesSlice';
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  const { data, status, error } = useSelector((state) => state.categories);
+  const categories = data.slice(0, 4);
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(loadCategories());
+    }
+  }, [dispatch, status]);
+
   return (
     <>
       <Hero />
@@ -20,7 +33,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <Categories limit={4} />
+          <Categories categories={categories} status={status} error={error} />
         </div>
       </section>
       <Discount />
