@@ -42,16 +42,16 @@
 
   button,
   .button {
-    @apply min-h-8 min-w-8 text-sm font-medium px-3 w-fit py-1 cursor-pointer rounded-md inline-flex items-center justify-center gap-2 no-underline active:scale-95 disabled:bg-neutral-300 disabled:cursor-not-allowed;
+    @apply min-h-8 min-w-8 text-sm font-medium px-4 w-fit cursor-pointer rounded-sm inline-flex items-center justify-center gap-2 no-underline active:scale-95 disabled:bg-neutral-300 disabled:cursor-not-allowed;
     font-family: inherit;
   }
 
   .button-primary {
-    @apply bg-gray-600 text-white hover:bg-gray-700;
+    @apply bg-blue-600 text-white hover:bg-neutral-800;
   }
 
   .button-secondary {
-    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+    @apply bg-neutral-200 text-neutral-800 hover:bg-neutral-300;
   }
 
   input[type='text'],
