@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchSaleProducts } from '../services/api';
+import { fetchAllProducts } from '../services/api';
 
 const initialState = {
   data: [],
@@ -8,8 +8,11 @@ const initialState = {
 };
 
 export const loadSaleProducts = createAsyncThunk('sale/loadProducts', async () => {
-  const response = await fetchSaleProducts();
-  return response.data;
+  const response = await fetchAllProducts();
+
+  return response.data.filter(
+    (product) => product.discont_price && Number(product.discont_price) < Number(product.price),
+  );
 });
 
 export const saleSlice = createSlice({
