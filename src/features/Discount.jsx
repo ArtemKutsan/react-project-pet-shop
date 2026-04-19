@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { submitSaleRequest } from '../services/api';
 
 const formFields = [
   {
@@ -38,8 +39,8 @@ export default function Discount() {
     reset,
   } = useForm();
 
-  const onSubmit = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 600));
+  const onSubmit = async (data) => {
+    await submitSaleRequest(data);
     reset();
   };
 
