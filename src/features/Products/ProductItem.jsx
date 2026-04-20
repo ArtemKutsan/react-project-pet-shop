@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { getImageUrl } from '../../utils/getImageUrl';
@@ -18,11 +19,13 @@ export default function ProductItem({ product }) {
   return (
     <article className="grid overflow-hidden rounded-xl border border-gray-200">
       <div className="relative bg-gray-50">
-        <img
-          src={getImageUrl(product.image)}
-          alt={product.title}
-          className="aspect-square w-full object-cover"
-        />
+        <Link to={`/products/${product.id}`}>
+          <img
+            src={getImageUrl(product.image)}
+            alt={product.title}
+            className="aspect-square w-full object-cover"
+          />
+        </Link>
 
         {discountPercent && (
           <div className="absolute right-4 top-4 rounded-sm bg-blue-600 px-3 py-2 text-xl font-semibold text-white">
@@ -42,14 +45,16 @@ export default function ProductItem({ product }) {
       </div>
 
       <div className="grid gap-4 p-5 border-t border-gray-200">
-        <h4 className="line-clamp-2 min-h-14 font-medium">{product.title}</h4>
+        <Link to={`/products/${product.id}`} className="grid gap-4">
+          <h4 className="line-clamp-2 min-h-14 font-medium">{product.title}</h4>
 
-        <div className="flex items-end gap-4">
-          <p className="text-4xl font-semibold">${currentPrice}</p>
-          {product.discont_price && (
-            <p className="text-xl font-medium text-gray-500 line-through">${product.price}</p>
-          )}
-        </div>
+          <div className="flex items-end gap-4">
+            <p className="text-4xl font-semibold">${currentPrice}</p>
+            {product.discont_price && (
+              <p className="text-xl font-medium text-gray-500 line-through">${product.price}</p>
+            )}
+          </div>
+        </Link>
       </div>
     </article>
   );

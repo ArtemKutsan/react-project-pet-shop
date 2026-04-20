@@ -34,7 +34,7 @@ export const loadProductsByCategory = createAsyncThunk(
 
 export const loadProductById = createAsyncThunk('products/loadById', async (id) => {
   const response = await fetchProductById(id);
-  return response.data;
+  return Array.isArray(response.data) ? response.data[0] : response.data;
 });
 
 export const productsSlice = createSlice({
