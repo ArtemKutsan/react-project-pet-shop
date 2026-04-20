@@ -47,7 +47,7 @@ export default function Discount() {
   return (
     <div className="bg-white py-14 md:py-20">
       <div className="container max-w-380">
-        <div className="rounded-xl bg-blue-700 p-8 pb-0">
+        <div className="rounded-xl p-8 pb-0 bg-linear-to-tr from-blue-600 to-blue-800">
           <h2 className="text-center text-white mb-8">5% off on the first order</h2>
 
           <div className="grid gap-8 md:grid-cols-[1.425fr_1fr] md:items-end">
