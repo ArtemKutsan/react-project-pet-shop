@@ -1,7 +1,46 @@
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import CartItem from '../../features/Cart/CartItem';
+import OrderForm from '../../features/Cart/OrderForm';
+
+const getCurrentPrice = (item) => item.discont_price || item.price;
+
 export default function CartPage() {
+  const items = useSelector((state) => state.cart.items);
+  const total = items.reduce((sum, item) => sum + getCurrentPrice(item) * item.quantity, 0);
+
   return (
-    <div className="container max-w-380 space-y-8 py-10">
-      <p>Корзина</p>
-    </div>
+    <section className="py-14 md:py-20">
+      <div className="container max-w-380 grid gap-10">
+        <div className="flex flex-col md:flex-row md:items-center">
+          <h2 className="mb-4 md:mb-0 md:mr-8">Shopping cart</h2>
+          <div className="hidden h-px grow bg-gray-200 md:flex" />
+          <Link
+            to="/all-products"
+            className="flex min-h-10 items-center justify-center rounded-sm border border-gray-200 px-6 font-medium text-gray-400 transition-colors hover:border-gray-400 hover:text-gray-800"
+          >
+            Back to the store
+          </Link>
+        </div>
+
+        {!items.length && (
+          <div className="rounded-xl border border-gray-200 p-8">
+            <p className="text-lg text-gray-500">Your cart is empty.</p>
+          </div>
+        )}
+
+        {!!items.length && (
+          <div className="grid gap-8 lg:grid-cols-[1.425fr_1fr] lg:items-start">
+            <div className="grid gap-4">
+              {items.map((item) => (
+                <CartItem key={item.id} item={item} />
+              ))}
+            </div>
+
+            <OrderForm items={items} total={total} />
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
