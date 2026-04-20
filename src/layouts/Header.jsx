@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LogoIcon, BasketIcon } from '../ui/icons';
 
 export default function Header() {
+  const itemsCount = useSelector((state) => state.cart.items.length);
+
   return (
     <header className="border-b border-gray-200 bg-white">
       <div className="container max-w-380 flex h-32 items-center justify-between">
@@ -27,7 +30,12 @@ export default function Header() {
         </nav>
 
         {/* Cart */}
-        <Link to="/cart" className="hover:text-blue-600">
+        <Link to="/cart" className="relative hover:text-blue-600">
+          {!!itemsCount && (
+            <div className="absolute left-0 top-0 flex min-h-6 min-w-6 items-center justify-center rounded-full bg-blue-600 px-1 text-sm font-semibold text-white">
+              {itemsCount}
+            </div>
+          )}
           <BasketIcon />
         </Link>
       </div>
