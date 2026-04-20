@@ -24,8 +24,11 @@ export default function CartPage() {
         </div>
 
         {!items.length && (
-          <div className="rounded-xl border border-gray-200 p-8">
-            <p className="text-lg text-gray-500">Your cart is empty.</p>
+          <div className="grid gap-6">
+            <p>Looks like you have no items in your basket currently.</p>
+            <Link to="/all-products" className="button button-primary min-h-14 px-8 text-xl">
+              Continue Shopping
+            </Link>
           </div>
         )}
 
