@@ -75,4 +75,20 @@
   .container {
     @apply mx-auto px-5 md:px-10;
   }
+
+  .order-success-modal .ant-modal-container {
+    @apply bg-blue-600! text-white! p-8!;
+  }
+
+  .order-success-modal .ant-modal-close {
+    @apply right-6 top-6 text-white!;
+  }
+
+  .order-success-modal .ant-modal-close:hover {
+    @apply bg-transparent text-white!;
+  }
+
+  .order-success-modal .ant-modal-close-x {
+    @apply flex h-12 w-12 items-center justify-center text-4xl leading-none;
+  }
 }

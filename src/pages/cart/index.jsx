@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import CartItem from '../../features/Cart/CartItem';
@@ -7,6 +9,7 @@ const getCurrentPrice = (item) => item.discont_price || item.price;
 
 export default function CartPage() {
   const items = useSelector((state) => state.cart.items);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const total = items.reduce((sum, item) => sum + getCurrentPrice(item) * item.quantity, 0);
 
   return (
@@ -40,10 +43,29 @@ export default function CartPage() {
               ))}
             </div>
 
-            <OrderForm items={items} total={total} />
+            <OrderForm items={items} total={total} onSuccess={() => setIsSuccessModalOpen(true)} />
           </div>
         )}
       </div>
+
+      <Modal
+        open={isSuccessModalOpen}
+        onCancel={() => setIsSuccessModalOpen(false)}
+        footer={null}
+        centered
+        width={548}
+        closable
+        wrapClassName="order-success-modal"
+        title={null}
+      >
+        <div className="grid gap-4 pr-8">
+          <h2 className="mb-6">Congratulations!</h2>
+          <div className="grid gap-4 text-xl md:text-2xl">
+            <p>Your order has been successfully placed on the website.</p>
+            <p>A manager will contact you shortly to confirm your order.</p>
+          </div>
+        </div>
+      </Modal>
     </section>
   );
 }

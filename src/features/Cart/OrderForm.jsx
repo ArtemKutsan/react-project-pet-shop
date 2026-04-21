@@ -33,7 +33,7 @@ const formFields = [
   },
 ];
 
-export default function OrderForm({ items, total }) {
+export default function OrderForm({ items, total, onSuccess }) {
   const dispatch = useDispatch();
   const {
     register,
@@ -53,6 +53,7 @@ export default function OrderForm({ items, total }) {
 
     dispatch(clearCart());
     reset();
+    onSuccess?.();
   };
 
   return (
