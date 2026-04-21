@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import PageBreadcrumbs from '../../components/PageBreadcrumbs';
 import { addToCart } from '../../store/cartSlice';
+import { loadCategories } from '../../store/categoriesSlice';
 import { clearCurrentProduct, loadProductById } from '../../store/productsSlice';
 import { getImageUrl } from '../../utils/getImageUrl';
 
@@ -17,6 +19,7 @@ export default function ProductDetailPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data: product, status, error } = useSelector((state) => state.products.byId);
+  const categoriesState = useSelector((state) => state.categories);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -28,6 +31,12 @@ export default function ProductDetailPage() {
       dispatch(clearCurrentProduct());
     };
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (categoriesState.status === 'idle') {
+      dispatch(loadCategories());
+    }
+  }, [categoriesState.status, dispatch]);
 
   if (status === 'failed') {
     return (
@@ -51,10 +60,20 @@ export default function ProductDetailPage() {
 
   const currentPrice = product.discont_price || product.price;
   const discountPercent = getDiscountPercent(product.price, product.discont_price);
+  const category = categoriesState.data.find((item) => item.id === product.categoryId);
+  const categoryTitle = category?.title || 'Categories';
 
   return (
     <section className="py-14 md:py-20">
       <div className="container max-w-380 grid gap-10">
+        <PageBreadcrumbs
+          items={[
+            { label: 'Main page', to: '/' },
+            { label: 'Categories', to: '/categories' },
+            { label: categoryTitle, to: product.categoryId ? `/categories/${product.categoryId}` : undefined },
+            { label: product.title },
+          ]}
+        />
         <div className="grid gap-8 md:grid-cols-[1.425fr_1fr] md:items-start">
           <div className="grid gap-8 md:grid-cols-[0.365fr_1fr]">
             <div className="order-2 md:order-1">

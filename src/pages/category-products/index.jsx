@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import PageBreadcrumbs from '../../components/PageBreadcrumbs';
 import Filters from '../../features/Filters';
 import Products from '../../features/Products';
 import { loadProductsByCategory } from '../../store/productsSlice';
@@ -33,6 +34,7 @@ export default function CategoryProductsPage() {
   return (
     <section className="py-14 md:py-20">
       <div className="container max-w-380 grid gap-10">
+        <PageBreadcrumbs items={[{ label: 'Main page', to: '/' }, { label: title }]} />
         <h2>{title}</h2>
         <Filters
           priceFrom={priceFrom}
