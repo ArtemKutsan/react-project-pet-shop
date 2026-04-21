@@ -13,6 +13,7 @@ export default function Filters({
   priceTo,
   discountedOnly,
   sortValue,
+  showDiscountedFilter = true,
   onPriceFromChange,
   onPriceToChange,
   onDiscountedChange,
@@ -42,13 +43,15 @@ export default function Filters({
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <h5>Discounted items</h5>
-        <Checkbox
-          checked={discountedOnly}
-          onChange={(event) => onDiscountedChange(event.target.checked)}
-        />
-      </div>
+      {showDiscountedFilter && (
+        <div className="flex items-center gap-4">
+          <h5>Discounted items</h5>
+          <Checkbox
+            checked={discountedOnly}
+            onChange={(event) => onDiscountedChange(event.target.checked)}
+          />
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center gap-4">
         <h5>Sorted</h5>
