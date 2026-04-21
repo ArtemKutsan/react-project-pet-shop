@@ -20,17 +20,17 @@ export default function Filters({
   onSortChange,
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-8">
+    <div className="flex flex-wrap items-center gap-8 md:gap-10">
       <div className="flex flex-wrap items-center gap-4">
-        <h5>Price</h5>
-        <div className="flex items-center gap-4">
+        <p className="text-xl font-semibold">Price</p>
+        <div className="flex flex-wrap items-center gap-4">
           <input
             type="number"
             value={priceFrom}
             onChange={(event) => onPriceFromChange(event.target.value)}
             placeholder="from"
             min="0"
-            className="min-h-10 border border-gray-200 rounded-sm pl-4 pr-2 max-w-32"
+            className="min-h-10 max-w-32 rounded-sm border border-gray-200 pl-4 pr-2"
           />
           <input
             type="number"
@@ -38,14 +38,14 @@ export default function Filters({
             onChange={(event) => onPriceToChange(event.target.value)}
             placeholder="to"
             min="0"
-            className="min-h-10 border border-gray-200 rounded-sm pl-4 pr-2 max-w-32"
+            className="min-h-10 max-w-32 rounded-sm border border-gray-200 pl-4 pr-2"
           />
         </div>
       </div>
 
       {showDiscountedFilter && (
         <div className="flex items-center gap-4">
-          <h5>Discounted items</h5>
+          <p className="text-xl font-semibold">Discounted items</p>
           <Checkbox
             checked={discountedOnly}
             onChange={(event) => onDiscountedChange(event.target.checked)}
@@ -54,12 +54,12 @@ export default function Filters({
       )}
 
       <div className="flex flex-wrap items-center gap-4">
-        <h5>Sorted</h5>
+        <p className="text-xl font-semibold">Sorted</p>
         <Select
           value={sortValue}
           onChange={onSortChange}
           options={sortOptions}
-          className="w-52 min-h-10"
+          className="min-h-10 w-52"
         />
       </div>
     </div>
