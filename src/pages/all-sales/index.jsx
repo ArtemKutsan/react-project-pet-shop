@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PageBreadcrumbs from '../../components/PageBreadcrumbs';
 import Products from '../../features/Products';
 import { loadSaleProducts } from '../../store/saleSlice';
 
@@ -16,6 +17,7 @@ export default function AllSalesPage() {
   return (
     <section className="py-14 md:py-20">
       <div className="container max-w-380 grid gap-10">
+        <PageBreadcrumbs items={[{ label: 'Main page', to: '/' }, { label: 'All sales' }]} />
         <h2>Discounted items</h2>
         <Products products={data} status={status} error={error} />
       </div>

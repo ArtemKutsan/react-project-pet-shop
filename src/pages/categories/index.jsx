@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PageBreadcrumbs from '../../components/PageBreadcrumbs';
 import Categories from '../../features/Categories';
 import { loadCategories } from '../../store/categoriesSlice';
 
@@ -16,6 +17,7 @@ export default function CategoriesPage() {
   return (
     <section className="py-14 md:py-20">
       <div className="container max-w-380 grid gap-10">
+        <PageBreadcrumbs items={[{ label: 'Main page', to: '/' }, { label: 'Categories' }]} />
         <h2>Categories</h2>
 
         <Categories categories={data} status={status} error={error} />
