@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import { getImageUrl } from '../../utils/getImageUrl';
 
@@ -13,8 +13,10 @@ const getDiscountPercent = (price, discountPrice) => {
 
 export default function ProductItem({ product }) {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
   const discountPercent = getDiscountPercent(product.price, product.discont_price);
   const currentPrice = product.discont_price || product.price;
+  const isInCart = cartItems.some((item) => item.id === product.id);
 
   return (
     <article className="grid overflow-hidden rounded-xl border border-gray-200">
@@ -37,9 +39,14 @@ export default function ProductItem({ product }) {
           <button
             type="button"
             onClick={() => dispatch(addToCart(product))}
-            className="w-full min-h-10 button button-primary"
+            disabled={isInCart}
+            className={`min-h-10 w-full ${
+              isInCart
+                ? 'button border border-gray-200 bg-white hover:bg-white'
+                : 'button button-primary'
+            }`}
           >
-            Add to cart
+            {isInCart ? 'Added' : 'Add to cart'}
           </button>
         </div>
       </div>
