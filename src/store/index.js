@@ -4,6 +4,7 @@ import productsReducer from './productsSlice';
 import categoriesReducer from './categoriesSlice';
 import saleReducer from './saleSlice';
 import userReducer from './userSlice';
+import { saveCartItems } from './cartStorage';
 
 export const store = configureStore({
   reducer: {
@@ -13,4 +14,8 @@ export const store = configureStore({
     sale: saleReducer,
     user: userReducer,
   },
+});
+
+store.subscribe(() => {
+  saveCartItems(store.getState().cart.items);
 });

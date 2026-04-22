@@ -20,6 +20,7 @@ export default function ProductDetailPage() {
   const { id } = useParams();
   const { data: product, status, error } = useSelector((state) => state.products.byId);
   const categoriesState = useSelector((state) => state.categories);
+  const cartItems = useSelector((state) => state.cart.items);
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function ProductDetailPage() {
   const discountPercent = getDiscountPercent(product.price, product.discont_price);
   const category = categoriesState.data.find((item) => item.id === product.categoryId);
   const categoryTitle = category?.title || 'Categories';
+  const isInCart = cartItems.some((item) => item.id === product.id);
 
   return (
     <section className="py-14 md:py-20">
@@ -132,9 +134,14 @@ export default function ProductDetailPage() {
               <button
                 type="button"
                 onClick={() => dispatch(addToCart({ ...product, quantity }))}
-                className="min-h-14 w-full px-8 text-xl button-primary"
+                disabled={isInCart}
+                className={`min-h-14 w-full px-8 text-xl ${
+                  isInCart
+                    ? 'button border border-gray-200 bg-white hover:bg-white'
+                    : 'button button-primary'
+                }`}
               >
-                Add to cart
+                {isInCart ? 'Added' : 'Add to cart'}
               </button>
             </div>
 
