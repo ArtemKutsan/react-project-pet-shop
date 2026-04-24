@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { submitSaleRequest } from '../services/api';
 
@@ -32,6 +33,8 @@ const formFields = [
 ];
 
 export default function Discount() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -40,7 +43,12 @@ export default function Discount() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    if (isSubmitted) {
+      return;
+    }
+
     await submitSaleRequest(data);
+    setIsSubmitted(true);
     reset();
   };
 
@@ -74,10 +82,10 @@ export default function Discount() {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isSubmitted}
                 className="mt-4 min-h-14 w-full justify-center rounded-sm bg-white px-8 text-xl font-semibold text-gray-900 transition-colors hover:bg-gray-100 disabled:bg-gray-200"
               >
-                {isSubmitting ? 'Sending...' : 'Get a discount'}
+                {isSubmitting ? 'Sending...' : isSubmitted ? 'Request submitted' : 'Get a discount'}
               </button>
             </form>
 
